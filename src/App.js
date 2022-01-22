@@ -12,17 +12,16 @@ function App() {
     }, []);
 
     const getGeocode = async () => {
-        const url = `https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=경기도+성남시+분당구+불정로+6+그린팩토리`;
-        const option = {
-            method: "GET", // <-> POST
-            mode: "cors", //외부 도메인에서 서버에 접속하려고 할때 지켜야 되는 규칙?
-            //브라우저 -> FE에 요청 -> BE에 요청 -> FE에 응답(여기에서)
-            header: {
+        const url = `https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=경기도 성남시 분당구 불정로 6 그린팩토리`;
+        const result = await fetch(url, {
+            method: "GET",
+            mode: "cors",
+            headers: {
                 "X-NCP-APIGW-API-KEY-ID": API_KEYS.MapId,
                 "X-NCP-APIGW-API-KEY": API_KEYS.MapKey,
             },
-        };
-        const result = await fetch(url, option);
+        });
+        console.log(result);
     };
 
     const getWeather = async (lat, lon) => {
